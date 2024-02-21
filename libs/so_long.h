@@ -6,7 +6,7 @@
 /*   By: daortega <daortega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:28:30 by daortega          #+#    #+#             */
-/*   Updated: 2024/02/21 18:05:27 by daortega         ###   ########.fr       */
+/*   Updated: 2024/02/21 19:27:30 by daortega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_map
 }	t_map;
 
 int		check_arg(int argc, char *argv[]);
-int		check_map(int fd);
-t_map	init_map(void);
+int		check_map(int fd, t_map *map);
+t_map	init_tmap(void);
 void	print_map(t_map map);
 #endif

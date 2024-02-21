@@ -6,7 +6,7 @@
 /*   By: daortega <daortega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:15:53 by daortega          #+#    #+#             */
-/*   Updated: 2024/02/21 18:28:59 by daortega         ###   ########.fr       */
+/*   Updated: 2024/02/21 18:45:18 by daortega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,28 +73,27 @@ static int	check_first_line(char *line, int *sline)
 	return (1);
 }
 
-int	check_map(int fd)
+int	check_map(int fd, t_map *map)
 {
 	char	*line;
-	t_map	map;
 
-	map = init_map();
 	line = get_next_line(fd);
-	if (check_first_line(line, &map.sline) == 0)
+	if (check_first_line(line, &map->sline) == 0)
 		return (free(line), 0);
-	map.nlines++;
+	map->nlines++;
 	while (line != NULL)
 	{
 		free(line);
 		line = get_next_line(fd);
-		if (check_line(line, &map) == 0)
+		if (check_line(line, map) == 0)
 			return (free(line), 0);
 		if (line != NULL)
-			map.nlines++;
+			map->nlines++;
 	}
 	free(line);
-	if ((map.nlines < 3 && map.sline < 5) || (map.nlines < 5 && map.sline < 3)
-		|| map.coin <= 0 || map.player != 1 || map.exit != 1)
+	if ((map->nlines < 3 && map->sline < 5) ||
+		(map->nlines < 5 && map->sline < 3) || 
+		map->coin <= 0 || map->player != 1 || map->exit != 1)
 		return (0);
 	return (1);
 }
