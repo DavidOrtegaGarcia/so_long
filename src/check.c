@@ -6,7 +6,7 @@
 /*   By: daortega <daortega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:15:53 by daortega          #+#    #+#             */
-/*   Updated: 2024/02/21 18:45:18 by daortega         ###   ########.fr       */
+/*   Updated: 2024/02/23 16:26:33 by daortega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,9 @@ int	check_map(int fd, t_map *map)
 			map->nlines++;
 	}
 	free(line);
-	if ((map->nlines < 3 && map->sline < 5) ||
-		(map->nlines < 5 && map->sline < 3) || 
-		map->coin <= 0 || map->player != 1 || map->exit != 1)
+	if ((map->nlines < 3 && map->sline < 5)
+		|| (map->nlines < 5 && map->sline < 3)
+		|| map->coin <= 0 || map->player != 1 || map->exit != 1)
 		return (0);
 	return (1);
 }

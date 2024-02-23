@@ -6,7 +6,7 @@
 /*   By: daortega <daortega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:28:30 by daortega          #+#    #+#             */
-/*   Updated: 2024/02/21 19:27:30 by daortega         ###   ########.fr       */
+/*   Updated: 2024/02/23 16:48:38 by daortega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,14 @@ typedef struct s_map
 	int	sline;
 }	t_map;
 
+typedef	struct s_point
+{
+	int	x;
+	int	y;
+}	t_point;
 int		check_arg(int argc, char *argv[]);
 int		check_map(int fd, t_map *map);
 t_map	init_tmap(void);
-void	print_map(t_map map);
+void	print_tmap(t_map tmap);
+char	*ft_sl_strdup(const char *s1);
 #endif
