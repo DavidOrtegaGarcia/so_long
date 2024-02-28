@@ -6,7 +6,7 @@
 /*   By: daortega <daortega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:15:53 by daortega          #+#    #+#             */
-/*   Updated: 2024/02/28 15:28:10 by daortega         ###   ########.fr       */
+/*   Updated: 2024/02/28 18:00:02 by daortega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,34 +99,5 @@ int	check_map(int fd, t_map *map)
 		|| (map->nlines < 5 && map->sline < 3)
 		|| map->coin <= 0 || map->player != 1 || map->exit != 1)
 		return (0);
-	return (1);
-}
-
-static int	check_ber(char *file)
-{
-	int	size;
-
-	size = ft_strlen(file);
-	if (size > 4)
-	{
-		size -= 4;
-		if (ft_strncmp(&file[size], ".ber", 4) == 0)
-			return (1);
-	}
-	return (0);
-}
-
-int	check_arg(int argc, char *argv[])
-{
-	if (argc != 2)
-	{
-		ft_printf("You have to pass only 1 argumnent\n");
-		return (-1);
-	}
-	if (check_ber(argv[1]) == 0)
-	{
-		ft_printf("File not valid\n");
-		return (-1);
-	}
 	return (1);
 }

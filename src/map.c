@@ -6,7 +6,7 @@
 /*   By: daortega <daortega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 17:24:21 by daortega          #+#    #+#             */
-/*   Updated: 2024/02/26 19:23:02 by daortega         ###   ########.fr       */
+/*   Updated: 2024/02/28 18:10:25 by daortega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	print_map(char **map)
 		i++;
 	}
 }
+
 char	**copy_map(char **map, t_map tmap)
 {
 	char	**newmap;
