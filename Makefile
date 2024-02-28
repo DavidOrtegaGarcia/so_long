@@ -6,22 +6,22 @@
 #    By: daortega <daortega@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/12 14:34:28 by daortega          #+#    #+#              #
-#    Updated: 2024/02/23 15:21:49 by daortega         ###   ########.fr        #
+#    Updated: 2024/02/28 15:47:39 by daortega         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 NAMELIB = so_long.h
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror 
+#-fsanitize=address
 
 #--------------<SRC>-------------
 SRC = src/
-CFILES = main.c check.c struct.c utils.c
+CFILES = main.c check.c struct.c utils.c map.c
 SRCC = $(addprefix $(SRC), $(CFILES))
 
 OBJC = $(SRCC:.c=.o)
-
 
 # RULES
 all: makelib $(NAME)
@@ -45,7 +45,7 @@ clean: cleanlibft
 	rm -f $(OBJC)
 
 fclean: clean fcleanlibft
-	rm -f $(SERVER) $(CLIENT) $(BSERVER) $(BCLIENT) 
+	rm -f $(NAME)
 
 re: fclean all
 

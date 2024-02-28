@@ -6,7 +6,7 @@
 /*   By: daortega <daortega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:19:31 by daortega          #+#    #+#             */
-/*   Updated: 2024/02/23 18:57:51 by daortega         ###   ########.fr       */
+/*   Updated: 2024/02/26 19:02:02 by daortega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,13 @@
 void	flood_fill(char **map, t_map *tmap, t_point pos)
 {
 	if (pos.y < 0 || pos.y >= tmap->nlines || pos.x < 0 || pos.x >= tmap->sline
-		|| map[pos.y][pos.x] == '1')
+		|| map[pos.y][pos.x] == '1' || map[pos.y][pos.x] == 'F')
 		return;
 	if (map[pos.y][pos.x] == 'C')
-	{
-		map[pos.y][pos.x] = 'F';
 		tmap->coin--;
-	}
 	if (map[pos.y][pos.x] == 'E')
 		tmap->exit--;
+	map[pos.y][pos.x] = 'F';
 	flood_fill(map, tmap, (t_point){pos.x - 1, pos.y});
 	flood_fill(map, tmap, (t_point){pos.x + 1, pos.y});
 	flood_fill(map, tmap, (t_point){pos.x, pos.y - 1});

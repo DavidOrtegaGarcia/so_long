@@ -6,7 +6,7 @@
 /*   By: daortega <daortega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:28:30 by daortega          #+#    #+#             */
-/*   Updated: 2024/02/23 18:57:57 by daortega         ###   ########.fr       */
+/*   Updated: 2024/02/26 19:11:15 by daortega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,18 @@ typedef struct s_map
 
 typedef	struct s_point
 {
-	int	y;
 	int	x;
+	int	y;
 }	t_point;
+
 int		check_arg(int argc, char *argv[]);
 int		check_map(int fd, t_map *map);
 t_map	init_tmap(void);
 void	print_tmap(t_map tmap);
 char	*ft_sl_strdup(char *s1);
+void	flood_fill(char **map, t_map *tmap, t_point pos);
+char	**init_map(t_map tmap, char *file);
+char	**free_map(char **map, int i);
+char	**copy_map(char **map, t_map tmap);
+void	print_map(char **map);
 #endif

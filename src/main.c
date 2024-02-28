@@ -6,76 +6,76 @@
 /*   By: daortega <daortega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:04:50 by daortega          #+#    #+#             */
-/*   Updated: 2024/02/23 19:10:06 by daortega         ###   ########.fr       */
+/*   Updated: 2024/02/26 19:26:01 by daortega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libs/so_long.h"
 
-void	print_map(char **map)
+t_point find_pos_player(char **map)
 {
-	int	i;
+	int i;
+	int	j;
+	t_point p_pos;
 
-	i = 0;
+	p_pos.y = -1;
+	p_pos.x = -1;
+ 	i = 0;
 	while (map[i] != NULL)
 	{
-		ft_printf("%s\n", map[i]);
+		j = 0;
+		while (map[i][j] != '\0')
+		{
+			if (map[i][j] == 'P')
+				{
+					p_pos.y = i;
+					p_pos.x = j;
+					return (p_pos);
+				}
+			j++;
+		}
 		i++;
 	}
+	return (p_pos);
 }
-
-static char	**free_map(char **map, int i)
+int open_and_fill_map(char **argv, t_map *tmap)
 {
-	while (--i >= 0)
-		free(map[i]);
-	free(map);
-	return (NULL);
-}
+	int	fd;
 
-static char	**init_map(t_map tmap, char *file)
-{
-	char	**map;
-	int		i;
-	int		fd;
-
-	i = 0;
-	fd = open(file, O_RDONLY);
-	map = (char **) malloc((tmap.nlines + 1) * sizeof(char *));
-	if (map == NULL)
-		return (NULL);
-	while (i < tmap.nlines)
-	{
-		map[i] = ft_sl_strdup(get_next_line(fd));
-		if (map[i] == NULL)
-			return (free_map(map, i));
-		i++;
-	}
-	map[i] = NULL;
+	fd = open(argv[1], O_RDONLY);
+	if (fd == -1)
+		return (ft_printf("The file doesn't exist\n"), -1);
+	*tmap = init_tmap();
+	if (check_map(fd, tmap) == 0)
+		return (close(fd), ft_printf("Invalid map\n"), -1);
 	close(fd);
-	return (map);
+	return (1);
 }
 
 int	main(int argc, char *argv[])
 {
-	int		fd;
 	t_map	tmap;
 	char	**map;
+	char	**cmap;
 	t_point p_pos;
 
 	if (check_arg(argc, argv) == -1)
 		return (-1);
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
-		return (ft_printf("The file doesn't exist\n"), -1);
-	tmap = init_tmap();
-	if (check_map(fd, &tmap) == 0)
-		return (close(fd), ft_printf("Invalid map\n"), -1);
-	close(fd);
+	if (open_and_fill_map(argv, &tmap) == -1)
+		return (-1);
 	print_tmap(tmap);
 	map = init_map(tmap, argv[1]);
 	if (map == NULL)
 		return (ft_printf("Malloc failed\n"), -1);
 	print_map(map);
-	p_pos = find_pos_player();
+	p_pos = find_pos_player(map);
+	ft_printf("Player position: %d, %d\n",p_pos.y, p_pos.x);
+	cmap = copy_map(map, tmap);
+	if (cmap == NULL)
+		return (ft_printf("Malloc failed\n"), -1);
+	flood_fill(cmap, &tmap, p_pos);
+	if (tmap.coin != 0 || tmap.exit != 0)
+		return (ft_printf("Invalid map\n"), -1);
+	free_map(cmap, tmap.nlines);
 	free_map(map, tmap.nlines);
 }
