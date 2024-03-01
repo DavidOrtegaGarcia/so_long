@@ -6,19 +6,19 @@
 #    By: daortega <daortega@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/12 14:34:28 by daortega          #+#    #+#              #
-#    Updated: 2024/02/28 19:30:26 by daortega         ###   ########.fr        #
+#    Updated: 2024/03/01 19:59:24 by daortega         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 NAMELIB = libs/so_long.h
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -Imlx
+CFLAGS = -Wall -Wextra -Werror 
 #-fsanitize=address
 
 #--------------<SRC>-------------
 SRC = src/
-CFILES = main.c check.c check2.c  struct.c utils.c map.c
+CFILES = main.c check.c check2.c  struct.c utils.c map.c mlx.c
 SRCC = $(addprefix $(SRC), $(CFILES))
 
 OBJC = $(SRCC:.c=.o)
@@ -33,10 +33,10 @@ makemlx:
 	$(MAKE) -C mlx
 	
 %.o: %.c $(NAMELIB) Makefile
-	$(CC) $(CFLAGS) -c -o $@ $< 
+	$(CC) $(CFLAGS) -Imlx -c $< -o $@
 
-$(NAME): $(OBJC) libft/libft.a mlx/mlx.a
-	$(CC) $(CFLAGS) libft/libft.a mlx/mlx.a $(OBJC) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+$(NAME): $(OBJC) libft/libft.a mlx/libmlx.a
+	$(CC) $(CFLAGS) libft/libft.a mlx/libmlx.a $(OBJC) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 cleanlibft:
 	$(MAKE) -C libft clean
@@ -47,13 +47,10 @@ fcleanlibft:
 cleanmlx:
 	$(MAKE) -C mlx clean
 
-fcleanmlx:
-	$(MAKE) -C mlx fclean
-
 clean: cleanlibft cleanmlx
 	rm -f $(OBJC)
 
-fclean: clean fcleanlibft fcleanmlx
+fclean: clean fcleanlibft
 	rm -f $(NAME)
 
 re: fclean all

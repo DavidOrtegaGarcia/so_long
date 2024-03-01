@@ -6,7 +6,7 @@
 /*   By: daortega <daortega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:28:30 by daortega          #+#    #+#             */
-/*   Updated: 2024/02/28 18:39:01 by daortega         ###   ########.fr       */
+/*   Updated: 2024/03/01 19:57:45 by daortega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,30 @@ typedef	struct s_point
 	int	y;
 }	t_point;
 
+typedef struct	s_img
+{
+	void	*img;
+	int		x;
+	int		y;
+}	t_img;
+
+typedef struct	s_imgs_scene
+{
+	t_img	player;
+	t_img	coin;
+	t_img 	exit;
+	t_img	tree;
+	t_img	grass1;
+	t_img	grass2;
+}	t_imgs_scene;
+
+typedef struct	s_mlx
+{
+	void			*mlx;
+	void			*mlx_win;
+	t_imgs_scene	sc; 
+}	t_mlx;
+
 int		check_arg(int argc, char *argv[]);
 int		check_map(int fd, t_map *map);
 t_map	init_tmap(void);
@@ -44,4 +68,5 @@ char	**free_map(char **map, int i);
 char	**copy_map(char **map, t_map tmap);
 void	print_map(char **map);
 int		check_assets_pos(char **map, t_map tmap);
+void 	run_mlx(char **map, t_map tmap);
 #endif

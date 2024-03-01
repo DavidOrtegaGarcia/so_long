@@ -6,7 +6,7 @@
 /*   By: daortega <daortega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 18:15:53 by daortega          #+#    #+#             */
-/*   Updated: 2024/02/28 18:00:02 by daortega         ###   ########.fr       */
+/*   Updated: 2024/03/01 15:49:25 by daortega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static int	check_first_line(char *line, int *sline)
 	if (line[i] == '\0')
 		return (0);
 	*sline = i;
-	if (*sline > 500)
+	if (*sline > 700)
 		return (0);
 	return (1);
 }
@@ -91,7 +91,7 @@ int	check_map(int fd, t_map *map)
 			return (free(line), 0);
 		if (line != NULL)
 			map->nlines++;
-		if (map->nlines > 500)
+		if (map->nlines > 700)
 			return (free(line), 0);
 	}
 	free(line);

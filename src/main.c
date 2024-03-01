@@ -6,7 +6,7 @@
 /*   By: daortega <daortega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:04:50 by daortega          #+#    #+#             */
-/*   Updated: 2024/02/28 18:38:27 by daortega         ###   ########.fr       */
+/*   Updated: 2024/03/01 19:41:20 by daortega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ int	main(int argc, char *argv[])
 {
 	t_map	tmap;
 	char	**map;
-	void	*mlx;
-	void	*mlx_win;
 
 	if (check_arg(argc, argv) == -1)
 		return (-1);
@@ -44,8 +42,6 @@ int	main(int argc, char *argv[])
 	print_map(map);
 	if (check_assets_pos(map, tmap) == -1)
 		return (free_map(map, tmap.nlines), -1);
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 800, 800, "Hello world!");
-	mlx_loop(mlx);
+	run_mlx(map, tmap);
 	free_map(map, tmap.nlines);
 }
