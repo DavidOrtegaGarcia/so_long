@@ -6,11 +6,13 @@
 /*   By: daortega <daortega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:04:50 by daortega          #+#    #+#             */
-/*   Updated: 2024/03/01 19:41:20 by daortega         ###   ########.fr       */
+/*   Updated: 2024/03/06 19:23:48 by daortega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libs/so_long.h"
+
+
 
 int	open_and_fill_map(char **argv, t_map *tmap)
 {
@@ -30,18 +32,20 @@ int	main(int argc, char *argv[])
 {
 	t_map	tmap;
 	char	**map;
+	t_point	p_pos;
 
 	if (check_arg(argc, argv) == -1)
 		return (-1);
 	if (open_and_fill_map(argv, &tmap) == -1)
 		return (-1);
-	print_tmap(tmap);
+	//print_tmap(tmap);
 	map = init_map(tmap, argv[1]);
 	if (map == NULL)
 		return (ft_printf("Malloc failed\n"), -1);
-	print_map(map);
-	if (check_assets_pos(map, tmap) == -1)
+	//print_map(map);
+	p_pos = find_pos_player(map);
+	//ft_printf("Player position: %d, %d\n", p_pos.y, p_pos.x);
+	if (check_assets_pos(map, tmap, p_pos) == -1)
 		return (free_map(map, tmap.nlines), -1);
-	run_mlx(map, tmap);
-	free_map(map, tmap.nlines);
+	run_mlx(map, tmap, p_pos);
 }

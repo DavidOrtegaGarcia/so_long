@@ -6,7 +6,7 @@
 #    By: daortega <daortega@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/12 14:34:28 by daortega          #+#    #+#              #
-#    Updated: 2024/03/01 19:59:24 by daortega         ###   ########.fr        #
+#    Updated: 2024/03/06 19:25:01 by daortega         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 #--------------<SRC>-------------
 SRC = src/
-CFILES = main.c check.c check2.c  struct.c utils.c map.c mlx.c
+CFILES = main.c check.c check_map.c  struct.c utils.c map.c mlx.c scene.c 
 SRCC = $(addprefix $(SRC), $(CFILES))
 
 OBJC = $(SRCC:.c=.o)
@@ -36,7 +36,7 @@ makemlx:
 	$(CC) $(CFLAGS) -Imlx -c $< -o $@
 
 $(NAME): $(OBJC) libft/libft.a mlx/libmlx.a
-	$(CC) $(CFLAGS) libft/libft.a mlx/libmlx.a $(OBJC) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJC) -Llibft -lft -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 cleanlibft:
 	$(MAKE) -C libft clean

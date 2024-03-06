@@ -6,84 +6,72 @@
 /*   By: daortega <daortega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 15:23:19 by daortega          #+#    #+#             */
-/*   Updated: 2024/03/01 20:05:20 by daortega         ###   ########.fr       */
+/*   Updated: 2024/03/06 19:22:28 by daortega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libs/so_long.h"
 
-void	put_image(char **map, int x, int y, t_mlx mlx)
+
+int	move_up(t_data *data, t_mlx tmlx, t_point p_pos, int movs)
 {
-	if (map[y][x] == '1')
+
+	if (data->map[p_pos.y -1][p_pos.x] == '1')
+		return (movs);
+	if (data->map[p_pos.y -1][p_pos.x] == '0')
 	{
-		//mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.sc.grass1.img, i, j);
-		mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.sc.tree.img, x * mlx.sc.player.x, y * mlx.sc.player.y);
+		mlx_put_image_to_window(tmlx.mlx, tmlx.mlx_win, tmlx.sc.player.img,
+			p_pos.x * tmlx.sc.player.x, (p_pos.y -1) * tmlx.sc.player.y);
+		mlx_put_image_to_window(tmlx.mlx, tmlx.mlx_win, tmlx.sc.grass.img,
+			p_pos.x * tmlx.sc.player.x, p_pos.y * tmlx.sc.grass.y);
 	}
-	if (map[y][x] == 'C')
+	if (data->map[p_pos.y -1][p_pos.x] == 'C')
 	{
-		//mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.sc.grass2.img, i, j);
-		mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.sc.coin.img, x * mlx.sc.player.x, y * mlx.sc.player.y);
+		mlx_put_image_to_window(tmlx.mlx, tmlx.mlx_win, tmlx.sc.player.img,
+			p_pos.x * tmlx.sc.player.x, (p_pos.y -1) * tmlx.sc.player.y);
+		mlx_put_image_to_window(tmlx.mlx, tmlx.mlx_win, tmlx.sc.grass.img,
+			p_pos.x * tmlx.sc.player.x, p_pos.y * tmlx.sc.grass.y);
+		data->tmap.coin--;
 	}
-	if (map[y][x] == 'E')
-	{
-		//mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.sc.grass2.img, i, j);
-		mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.sc.exit.img, x * mlx.sc.player.x, y * mlx.sc.player.y);
-	}
-	if (map[y][x] == 'P')
-	{
-		//mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.sc.grass2.img, i, j);
-		mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.sc.player.img, x * mlx.sc.player.x, y * mlx.sc.player.y);
-	}
-	if (map[y][x] == '0')
-		mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, mlx.sc.grass2.img, x * mlx.sc.player.x, y * mlx.sc.player.y);
+	//if (data->map[p_pos.y -1][p_pos.x] == 'E')
+	data->p_pos.y--;
+	movs++;
+	return (movs);
 }
 
-void	fill_window(t_mlx mlx, char **map)
+static int	key_hook(int keycode, t_data *data)
 {
-	int	i;
-	int	j;
+	int	static movs = 0;
 
-	i = 0;
-	while(map[i] != NULL)
-	{
-		j = 0;
-		while (map[i][j] != '\0')
-		{
-			put_image(map, j, i, mlx);
-			j++;
-		}
-		i++;
-	}
+	if (keycode == W_KEY || keycode == UP_KEY)
+		movs = move_up(data, data->tmlx, data->p_pos, movs);
+	/*if (keycode == A_KEY || || keycode == LEFT_KEY)
+		movs = move_left();
+	if (keycode == S_KEY || || keycode == DOWN_KEY)
+		movs = move_down();
+	if (keycode == D_KEY)
+		movs = move_right();
+	if (keycode == ESC_KEY)*/
+
+	ft_printf("Number of movs: %d\n", movs);
+	return (0);
 }
 
-t_imgs_scene init_scene(void *mlx)
+void  run_mlx(char **map, t_map tmap, t_point p_pos)
 {
-	t_imgs_scene	sc;
-
-	sc.player.img = mlx_xpm_file_to_image(mlx, "textures/Warrior.xpm", 
-	&sc.player.x, &sc.player.y);
-	sc.coin.img = mlx_xpm_file_to_image(mlx, "textures/Potion.xpm", 
-	&sc.coin.x, &sc.coin.y);
-	sc.exit.img = mlx_xpm_file_to_image(mlx, "textures/Chest.xpm", 
-	&sc.exit.x, &sc.exit.y);
-	sc.tree.img = mlx_xpm_file_to_image(mlx, "textures/Tree.xpm", 
-	&sc.tree.x, &sc.tree.y);
-	sc.grass1.img = mlx_xpm_file_to_image(mlx, "textures/Grass1.xpm", 
-	&sc.grass1.x, &sc.grass2.y);
-	sc.grass2.img = mlx_xpm_file_to_image(mlx, "textures/Grass2.xpm", 
-	&sc.grass2.x, &sc.grass2.y);
-	return (sc);
-}
-
-void  run_mlx(char **map, t_map tmap)
-{
-	t_mlx	mlx;
-
+	t_mlx	tmlx;
+	t_data	data;
+	
 	tmap.coin = tmap.coin;
-	mlx.mlx = mlx_init();
-	mlx.sc = init_scene(mlx.mlx);
-	mlx.mlx_win = mlx_new_window(mlx.mlx, tmap.sline * mlx.sc.player.x,
-	tmap.nlines * mlx.sc.player.y , "so_long");
-	fill_window(mlx, map);
-	mlx_loop(mlx.mlx);
+	tmlx.mlx = mlx_init();
+	tmlx.sc = init_scene(tmlx.mlx);
+	tmlx.mlx_win = mlx_new_window(tmlx.mlx, tmap.sline * tmlx.sc.player.x,
+	tmap.nlines * tmlx.sc.player.y , "so_long");
+	fill_window(tmlx, map);
+	data.tmlx = tmlx;
+	data.map = map;
+	data.tmap = tmap;
+	data.p_pos = p_pos;
+	mlx_key_hook(tmlx.mlx_win, key_hook, &data);
+	mlx_loop(tmlx.mlx);
 }

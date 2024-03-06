@@ -6,7 +6,7 @@
 /*   By: daortega <daortega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:19:31 by daortega          #+#    #+#             */
-/*   Updated: 2024/02/28 18:10:01 by daortega         ###   ########.fr       */
+/*   Updated: 2024/03/06 19:23:57 by daortega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,42 @@ void	flood_fill(char **map, t_map *tmap, t_point pos)
 	if (map[pos.y][pos.x] == 'C')
 		tmap->coin--;
 	if (map[pos.y][pos.x] == 'E')
+	{
 		tmap->exit--;
+		map[pos.y][pos.x] = '1';
+		return ;
+	}
 	map[pos.y][pos.x] = 'F';
 	flood_fill(map, tmap, (t_point){pos.x - 1, pos.y});
 	flood_fill(map, tmap, (t_point){pos.x + 1, pos.y});
 	flood_fill(map, tmap, (t_point){pos.x, pos.y - 1});
 	flood_fill(map, tmap, (t_point){pos.x, pos.y + 1});
+}
+t_point	find_pos_player(char **map)
+{
+	int		i;
+	int		j;
+	t_point	p_pos;
+
+	p_pos.y = -1;
+	p_pos.x = -1;
+	i = 0;
+	while (map[i] != NULL)
+	{
+		j = 0;
+		while (map[i][j] != '\0')
+		{
+			if (map[i][j] == 'P')
+			{
+				p_pos.y = i;
+				p_pos.x = j;
+				return (p_pos);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (p_pos);
 }
 
 static size_t	ft_linelen(const char *s)
