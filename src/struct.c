@@ -6,11 +6,22 @@
 /*   By: daortega <daortega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 17:20:03 by daortega          #+#    #+#             */
-/*   Updated: 2024/02/26 15:44:12 by daortega         ###   ########.fr       */
+/*   Updated: 2024/03/08 17:36:27 by daortega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libs/so_long.h"
+
+t_data	init_data(t_mlx tmlx, char **map, t_map tmap, t_point p_pos)
+{
+	t_data	data;
+
+	data.tmlx = tmlx;
+	data.map = map;
+	data.tmap = tmap;
+	data.p_pos = p_pos;
+	return (data);
+}
 
 void	print_tmap(t_map tmap)
 {

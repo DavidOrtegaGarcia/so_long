@@ -6,7 +6,7 @@
 /*   By: daortega <daortega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:28:30 by daortega          #+#    #+#             */
-/*   Updated: 2024/03/08 17:07:54 by daortega         ###   ########.fr       */
+/*   Updated: 2024/03/08 17:28:35 by daortega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,9 @@ typedef struct	s_img
 typedef struct	s_imgs_scene
 {
 	t_img	player;
+	t_img	playerl;
+	t_img	playerb;
+	t_img	playerr;
 	t_img	coin;
 	t_img 	exit;
 	t_img	tree;
@@ -108,6 +111,7 @@ int				check_assets_pos(char **map, t_map tmap, t_point p_pos);
 void 			run_mlx(char **map, t_map tmap, t_point p_pos);
 t_imgs_scene	init_scene(void *mlx);
 void			fill_window(t_mlx mlx, char **map);
+t_data			init_data(t_mlx tmlx, char **map, t_map tmap, t_point p_pos);
 int				move_up(t_data *data, t_mlx tmlx, t_point p_pos, int movs);
 int				move_left(t_data *data, t_mlx tmlx, t_point p_pos, int movs);
 int				move_down(t_data *data, t_mlx tmlx, t_point p_pos, int movs);

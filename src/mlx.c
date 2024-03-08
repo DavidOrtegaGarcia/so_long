@@ -6,7 +6,7 @@
 /*   By: daortega <daortega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 15:23:19 by daortega          #+#    #+#             */
-/*   Updated: 2024/03/08 16:48:04 by daortega         ###   ########.fr       */
+/*   Updated: 2024/03/08 17:36:09 by daortega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	key_hook(int keycode, t_data *data)
 {
-	int	static movs = 0;
+	static int	movs = 0;
 
 	if (keycode == W_KEY || keycode == UP_KEY)
 		movs = move_up(data, data->tmlx, data->p_pos, movs);
@@ -30,26 +30,23 @@ static int	key_hook(int keycode, t_data *data)
 	return (0);
 }
 
-void  run_mlx(char **map, t_map tmap, t_point p_pos)
+void	run_mlx(char **map, t_map tmap, t_point p_pos)
 {
 	t_mlx	tmlx;
 	t_data	data;
-	
+
 	tmap.coin = tmap.coin;
 	tmlx.mlx = mlx_init();
 	tmlx.sc = init_scene(tmlx.mlx);
 	tmlx.mlx_win = mlx_new_window(tmlx.mlx, tmap.sline * tmlx.sc.player.x,
-	tmap.nlines * tmlx.sc.player.y , "so_long");
+			tmap.nlines * tmlx.sc.player.y, "so_long");
 	/*if (tmlx.mlx_win == NULL)
     {
         free(tmlx.mlx_win);
         return;
     }*/
 	fill_window(tmlx, map);
-	data.tmlx = tmlx;
-	data.map = map;
-	data.tmap = tmap;
-	data.p_pos = p_pos;
+	data = init_data(tmlx, map, tmap, p_pos);
 	mlx_key_hook(tmlx.mlx_win, key_hook, &data);
 	mlx_loop(tmlx.mlx);
 }

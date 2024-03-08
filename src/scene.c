@@ -6,7 +6,7 @@
 /*   By: daortega <daortega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 15:47:38 by daortega          #+#    #+#             */
-/*   Updated: 2024/03/08 17:11:12 by daortega         ###   ########.fr       */
+/*   Updated: 2024/03/08 17:16:30 by daortega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,12 @@ t_imgs_scene	init_scene(void *mlx)
 
 	sc.player.img = mlx_xpm_file_to_image(mlx, "textures/Player.xpm",
 			&sc.player.x, &sc.player.y);
+	sc.playerl.img = mlx_xpm_file_to_image(mlx, "textures/PlayerLeft.xpm",
+			&sc.playerl.x, &sc.playerl.y);
+	sc.playerb.img = mlx_xpm_file_to_image(mlx, "textures/PlayerBack.xpm",
+			&sc.playerb.x, &sc.playerb.y);
+	sc.playerr.img = mlx_xpm_file_to_image(mlx, "textures/PlayerRight.xpm",
+			&sc.playerr.x, &sc.playerr.y);
 	sc.coin.img = mlx_xpm_file_to_image(mlx, "textures/Coin.xpm",
 			&sc.coin.x, &sc.coin.y);
 	sc.exit.img = mlx_xpm_file_to_image(mlx, "textures/Door.xpm",
