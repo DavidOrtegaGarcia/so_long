@@ -6,7 +6,7 @@
 /*   By: daortega <daortega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:28:30 by daortega          #+#    #+#             */
-/*   Updated: 2024/03/06 19:16:28 by daortega         ###   ########.fr       */
+/*   Updated: 2024/03/08 17:07:54 by daortega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ typedef struct	s_data
 int				check_arg(int argc, char *argv[]);
 int				check_map(int fd, t_map *map);
 t_map			init_tmap(void);
-void			print_tmap(t_map tmap);
+//void			print_tmap(t_map tmap);
 char			*ft_sl_strdup(char *s1);
 void			flood_fill(char **map, t_map *tmap, t_point pos);
 char			**init_map(t_map tmap, char *file);
@@ -108,4 +108,9 @@ int				check_assets_pos(char **map, t_map tmap, t_point p_pos);
 void 			run_mlx(char **map, t_map tmap, t_point p_pos);
 t_imgs_scene	init_scene(void *mlx);
 void			fill_window(t_mlx mlx, char **map);
+int				move_up(t_data *data, t_mlx tmlx, t_point p_pos, int movs);
+int				move_left(t_data *data, t_mlx tmlx, t_point p_pos, int movs);
+int				move_down(t_data *data, t_mlx tmlx, t_point p_pos, int movs);
+int				move_right(t_data *data, t_mlx tmlx, t_point p_pos, int movs);
+void 			end_game(t_data *data);
 #endif

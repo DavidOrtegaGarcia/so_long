@@ -6,7 +6,7 @@
 #    By: daortega <daortega@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/12 14:34:28 by daortega          #+#    #+#              #
-#    Updated: 2024/03/06 19:25:01 by daortega         ###   ########.fr        #
+#    Updated: 2024/03/08 16:31:47 by daortega         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CFLAGS = -Wall -Wextra -Werror
 
 #--------------<SRC>-------------
 SRC = src/
-CFILES = main.c check.c check_map.c  struct.c utils.c map.c mlx.c scene.c 
+CFILES = main.c check.c check_map.c  struct.c utils.c map.c mlx.c scene.c move.c
 SRCC = $(addprefix $(SRC), $(CFILES))
 
 OBJC = $(SRCC:.c=.o)

@@ -6,12 +6,11 @@
 /*   By: daortega <daortega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:04:50 by daortega          #+#    #+#             */
-/*   Updated: 2024/03/06 19:23:48 by daortega         ###   ########.fr       */
+/*   Updated: 2024/03/08 16:49:22 by daortega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libs/so_long.h"
-
 
 
 int	open_and_fill_map(char **argv, t_map *tmap)

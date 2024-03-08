@@ -6,11 +6,20 @@
 /*   By: daortega <daortega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 15:19:31 by daortega          #+#    #+#             */
-/*   Updated: 2024/03/06 19:23:57 by daortega         ###   ########.fr       */
+/*   Updated: 2024/03/08 16:50:44 by daortega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libs/so_long.h"
+
+void end_game(t_data *data)
+{
+	mlx_destroy_window(data->tmlx.mlx, data->tmlx.mlx_win);
+	free(data->tmlx.mlx);
+	free_map(data->map, data->tmap.nlines);
+	ft_printf("GAME OVER\n");
+	exit(1);
+}
 
 void	flood_fill(char **map, t_map *tmap, t_point pos)
 {
