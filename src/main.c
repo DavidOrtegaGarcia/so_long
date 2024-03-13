@@ -6,7 +6,7 @@
 /*   By: daortega <daortega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 15:04:50 by daortega          #+#    #+#             */
-/*   Updated: 2024/03/08 17:34:36 by daortega         ###   ########.fr       */
+/*   Updated: 2024/03/13 16:45:46 by daortega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,10 @@ int	main(int argc, char *argv[])
 		return (-1);
 	if (open_and_fill_map(argv, &tmap) == -1)
 		return (-1);
-	//print_tmap(tmap);
 	map = init_map(tmap, argv[1]);
 	if (map == NULL)
 		return (ft_printf("Malloc failed\n"), -1);
-	//print_map(map);
 	p_pos = find_pos_player(map);
-	//ft_printf("Player position: %d, %d\n", p_pos.y, p_pos.x);
 	if (check_assets_pos(map, tmap, p_pos) == -1)
 		return (free_map(map, tmap.nlines), -1);
 	run_mlx(map, tmap, p_pos);

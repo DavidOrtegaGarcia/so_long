@@ -6,7 +6,7 @@
 #    By: daortega <daortega@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/12 14:34:28 by daortega          #+#    #+#              #
-#    Updated: 2024/03/08 16:31:47 by daortega         ###   ########.fr        #
+#    Updated: 2024/03/13 17:11:34 by daortega         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,10 +21,11 @@ SRC = src/
 CFILES = main.c check.c check_map.c  struct.c utils.c map.c mlx.c scene.c move.c
 SRCC = $(addprefix $(SRC), $(CFILES))
 
-OBJC = $(SRCC:.c=.o)
+DIR_O = tmp/
+OBJC = $(addprefix $(DIR_O), $(SRCC:.c=.o))
 
 # RULES
-all: makelibft makemlx $(NAME)
+all: makelibft makemlx $(DIR_O) $(NAME)
 
 makelibft: 
 	$(MAKE) -C libft
@@ -32,7 +33,11 @@ makelibft:
 makemlx:
 	$(MAKE) -C mlx
 	
-%.o: %.c $(NAMELIB) Makefile
+$(DIR_O):
+	mkdir -p $(DIR_O)
+
+$(DIR_O)%.o: %.c $(NAMELIB) Makefile
+	mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -Imlx -c $< -o $@
 
 $(NAME): $(OBJC) libft/libft.a mlx/libmlx.a
@@ -48,6 +53,7 @@ cleanmlx:
 	$(MAKE) -C mlx clean
 
 clean: cleanlibft cleanmlx
+	rm -fr $(DIR_O)
 	rm -f $(OBJC)
 
 fclean: clean fcleanlibft
