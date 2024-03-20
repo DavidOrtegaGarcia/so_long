@@ -6,7 +6,7 @@
 #    By: daortega <daortega@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/12 14:34:28 by daortega          #+#    #+#              #
-#    Updated: 2024/03/15 19:48:56 by daortega         ###   ########.fr        #
+#    Updated: 2024/03/20 17:08:26 by daortega         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ OBJC = $(addprefix $(DIR_O), $(SRCC:.c=.o))
 all: makelibft makemlx $(DIR_O) $(NAME)
 
 makelibft: 
-	$(MAKE) -C libft
+	$(MAKE) -C libft 
 
 makemlx:
 	$(MAKE) -C mlx
@@ -52,7 +52,7 @@ cleanmlx:
 	$(MAKE) -C mlx clean
 
 clean: cleanlibft cleanmlx
-	rm -fr $(DIR_O)
+	rm -rf $(DIR_O)
 	rm -f $(OBJC)
 
 fclean: clean fcleanlibft

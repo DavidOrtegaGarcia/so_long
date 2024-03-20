@@ -6,7 +6,7 @@
 /*   By: daortega <daortega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 15:23:19 by daortega          #+#    #+#             */
-/*   Updated: 2024/03/13 15:45:27 by daortega         ###   ########.fr       */
+/*   Updated: 2024/03/20 18:17:47 by daortega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	run_mlx(char **map, t_map tmap, t_point p_pos)
 	t_mlx	tmlx;
 	t_data	data;
 
-	tmap.coin = tmap.coin;
 	tmlx.mlx = mlx_init();
 	tmlx.sc = init_scene(tmlx.mlx);
 	tmlx.mlx_win = mlx_new_window(tmlx.mlx, tmap.sline * tmlx.sc.player.x,

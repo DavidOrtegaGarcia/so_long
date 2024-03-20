@@ -6,7 +6,7 @@
 /*   By: daortega <daortega@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:28:30 by daortega          #+#    #+#             */
-/*   Updated: 2024/03/15 18:48:17 by daortega         ###   ########.fr       */
+/*   Updated: 2024/03/20 18:19:18 by daortega         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ typedef struct s_data
 int				check_arg(int argc, char *argv[]);
 int				check_map(int fd, t_map *tmap);
 t_map			init_tmap(void);
-//void			print_tmap(t_map tmap);
+void			print_tmap(t_map tmap);
 char			*ft_sl_strdup(char *s1);
 void			flood_fill(char **map, t_map *tmap, t_point pos);
 char			**init_map(t_map tmap, char *file);
