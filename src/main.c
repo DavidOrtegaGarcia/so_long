@@ -12,7 +12,7 @@
 
 #include "../libs/so_long.h"
 
-int	open_and_fill_map(char **argv, t_map *tmap)
+static int	open_and_fill_map(char **argv, t_map *tmap)
 {
 	int	fd;
 
