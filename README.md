@@ -3,12 +3,13 @@
 This project is part of the 42 curriculum. The main objective is to create a **simple 2D game** using the MiniLibX (MLX) graphics library. The goal is to learn about **graphics programming**, window management, event handling (keyboard and mouse), and basic game loops by building a top-down game from scratch in C.
 
 ## 🚀 Prerequisites & Compatibility
+
 To compile and run this project, you must have the following ready on your Mac:
 * [GCC](https://gcc.gnu.org/)
 * [Make](https://www.gnu.org/software/make/)
-* **MiniLibX (MacOS/Cocoa version):** Included within the local repository repository files.
+* **MiniLibX (MacOS):** Included within the local repository repository files.
   
-> 🍏 **Platform Note:** This project is explicitly designed, developed, and optimized to run exclusively on **macOS**. Due to the specific API calls of the MiniLibX Cocoa version, it is not compatible with Linux or Windows environments out of the box.
+> 🍏 **Platform Note:** This project is explicitly designed, developed, and optimized to run exclusively on **macOS**. Due to the specific API calls of the MiniLibX version, it is not compatible with Linux or Windows environments out of the box.
 
 ## 🏗 Project Structure
 The project is organized with the automation setup (`Makefile`) at the root level, standard submodules, and your modularized source code inside the `src` directory:
@@ -36,8 +37,8 @@ C  -> Collectible item to be gathered
 E  -> Map exit (opens or triggers victory once all C are collected)
 P  -> Starting position of the player
 ```
-* **Movement Rules:** The game tracks and displays the current state of the player:
 
+* **Movement Rules:** The game tracks and displays the current state of the player:
 ```text
 W / Up Arrow    -> Move up
 A / Left Arrow  -> Move left
@@ -51,7 +52,7 @@ ESC / Close (X) -> Safely close the game window
 
 To ensure a smooth user experience, the game relies heavily on event hooks and dynamic rendering:
 
-* **Movement Counter:** Every successful move increases the step count, which is printed directly in the terminal (or rendered on screen if bonus features are included).
+* **Movement Counter:** Every successful move increases the step count, which is printed directly in the terminal.
 * **Window Interruptions:** Properly hooks into the window destruction event (clicking the Mac 'X' red button or pressing `ESC`), guaranteeing a clean termination.
 
 ## 🛠 Usage
